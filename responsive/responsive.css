@@ -1,0 +1,28 @@
+.k8em0 {
+  width: 600px;
+  height: 600px;
+}
+
+@media only screen and (min-width: 1200px) {
+  .k8em0 {
+    background: url("k8em0.jpg") 0 0px;
+  }
+}
+
+@media only screen and (max-width: 1200px) and (min-width: 900px) {
+  .k8em0 {
+    background: url("k8em0.jpg") 600px 0px;
+  }
+}
+
+@media only screen and (max-width: 900px) and (min-width: 600px) {
+  .k8em0 {
+    background: url("k8em0.jpg") 0 -600px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .k8em0 {
+    background: url("k8em0.jpg") 600px -600px;
+  }
+}
