@@ -14,8 +14,94 @@
 <div id="lyrics"></div>
 
 <script>
+  var vid = document.getElementById('rickroll');
   var lyrics = document.getElementById('lyrics');
-  
+  vid.ontimeupdate = function() {updateLyric()};
+  function updateLyric() {
+    if (vid.currentTime > 17 & vid.currentTime < 23) {
+      lyrics.innerHTML = "We're no strangers to love";
+    } else if (vid.currentTime >= 23 & vid.currentTime < 26) {
+      lyrics.innerHTML = "You know the rules and so do I";
+    } else if (vid.currentTime >= 26 & vid.currentTime < 31) {
+      lyrics.innerHTML = "A full commitment's what I'm thinking of";
+    } else if (vid.currentTime >= 31 & vid.currentTime < 35) {
+      lyrics.innerHTML = "You wouldn't get this from any other guy";
+    } else if (vid.currentTime >= 35 & vid.currentTime < 40) {
+      lyrics.innerHTML = "I just wanna tell you how I'm feeling";
+    } else if ((vid.currentTime >= 40 & vid.currentTime < 43) |
+               (vid.currentTime >= 158 & vid.currentTime < 160)) {
+      lyrics.innerHTML = "Gotta make you understand";
+    } else if ((vid.currentTime >= 43 & vid.currentTime < 45) |
+               (vid.currentTime >= 85 & vid.currentTime < 87)|
+               (vid.currentTime >= 101 & vid.currentTime < 104) |
+               (vid.currentTime >= 160 & vid.currentTime < 163) |
+               (vid.currentTime >= 178 & vid.currentTime < 180) |
+               (vid.currentTime >= 194 & vid.currentTime < 197)) {
+      lyrics.innerHTML = "Never gonna give you up";
+    } else if ((vid.currentTime >= 45 & vid.currentTime < 47) |
+               (vid.currentTime >= 87 & vid.currentTime < 89) |
+               (vid.currentTime >= 104 & vid.currentTime < 106) |
+               (vid.currentTime >= 163 & vid.currentTime < 165) |
+               (vid.currentTime >= 180 & vid.currentTime < 182) |
+               (vid.currentTime >= 197 & vid.currentTime < 199)) {
+      lyrics.innerHTML = "Never gonna let you down";
+    } else if ((vid.currentTime >= 47 & vid.currentTime < 51) |
+               (vid.currentTime >= 89 & vid.currentTime < 93) |
+               (vid.currentTime >= 165 & vid.currentTime < 169) |
+               (vid.currentTime >= 182 & vid.currentTime < 186) |
+               (vid.currentTime >= 199 & vid.currentTime < 203)) {
+      lyrics.innerHTML = "Never gonna run around and desert you";
+    } else if ((vid.currentTime >= 51 & vid.currentTime < 53.6) |
+               (vid.currentTime >= 93 & vid.currentTime < 96) |
+               (vid.currentTime >= 110 & vid.currentTime < 112) |
+               (vid.currentTime >= 169 & vid.currentTime < 172) |
+               (vid.currentTime >= 186 & vid.currentTime < 188) |
+               (vid.currentTime >= 203 & vid.currentTime < 205)) {
+      lyrics.innerHTML = "Never gonna make you cry";
+    } else if ((vid.currentTime >= 53.6 & vid.currentTime < 55) |
+              (vid.currentTime >= 96 & vid.currentTime < 97) |
+              (vid.currentTime >= 112 & vid.currentTime < 115) |
+              (vid.currentTime >= 172 & vid.currentTime < 174) |
+              (vid.currentTime >= 188 & vid.currentTime < 191) |
+              (vid.currentTime >= 205 & vid.currentTime < 207)) {
+      lyrics.innerHTML = "Never gonna say goodbye";
+    } else if ((vid.currentTime >= 55 & vid.currentTime < 60) |
+              (vid.currentTime >= 97 & vid.currentTime < 101) |
+              (vid.currentTime >= 115 & vid.currentTime < 119) |
+              (vid.currentTime >= 174 & vid.currentTime < 178) |
+              (vid.currentTime >= 191 & vid.currentTime < 194) |
+              (vid.currentTime >= 207 & vid.currentTime < 210)) {
+      lyrics.innerHTML = "Never gonna tell a lie and hurt you";
+    } else if ((vid.currentTime >= 60 & vid.currentTime < 65) |
+               (vid.currentTime >= 137 & vid.currentTime < 141)) {
+      lyrics.innerHTML = "We've known each other for so long";
+    } else if ((vid.currentTime >= 65 & vid.currentTime < 69) |
+               (vid.currentTime >= 141 & vid.currentTime < 145)) {
+      lyrics.innerHTML = "Your heart's been aching, but you're too shy to say it";
+    } else if ((vid.currentTime >= 69 & vid.currentTime < 73) |
+               (vid.currentTime >= 145 & vid.currentTime < 149)) {
+      lyrics.innerHTML = "Inside, we both know what's been going on";
+    } else if ((vid.currentTime >= 73 & vid.currentTime < 77) |
+               (vid.currentTime >= 149 & vid.currentTime < 153)) {
+      lyrics.innerHTML = "We know the game and we're gonna play it";
+    } else if (vid.currentTime >= 77 & vid.currentTime < 82) {
+      lyrics.innerHTML = "And if you ask me how I'm feeling";
+    } else if (vid.currentTime >= 82 & vid.currentTime < 85) {
+      lyrics.innerHTML = "Don't tell me you're too blind to see";
+    } else if (vid.currentTime >= 119 & vid.currentTime < 127) {
+      lyrics.innerHTML = "(Ooh, give you up)";
+    } else if ((vid.currentTime >= 127 & vid.currentTime < 130) |
+               (vid.currentTime >= 132 & vid.currentTime < 135)) {
+      lyrics.innerHTML = "Never gonna give, never gonna give";
+    } else if ((vid.currentTime >= 130 & vid.currentTime < 132) |
+               (vid.currentTime >= 135 & vid.currentTime < 137)) {
+      lyrics.innerHTML = "(Give you up)";
+    } else if (vid.currentTime >= 153 & vid.currentTime < 158) {
+      lyrics.innerHTML = "I just wanna tell you how I'm feeling";
+    } else if (vid.currentTime > 211) {
+      lyrics.innerHTML = "Thanks for watching!"
+    }
+  }
 </script>
 </body>
 </html>
