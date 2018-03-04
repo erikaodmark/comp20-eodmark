@@ -1,1 +1,65 @@
 <!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Ride Sharing Service</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="notuber_style.css"/>
+        <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAt_15sTMAPU300bClj9kMsS_jGIP1NLDY">
+        </script>
+        <script>
+            var map;
+            var myLat = 0;
+            var myLng = 0;
+            var myCoords = new google.maps.LatLng(myLat, myLng);
+            var myOptions = {
+            	zoom: 15,
+            	center: myCoords,
+            	mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var myMarker
+            var infowindow = new google.maps.InfoWindow();
+            function initMap() {
+                map = new google.maps.Map(document.getElementById('map'), myOptions);
+                getMyLocation();
+            }
+            function getMyLocation() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        myLat = position.coords.latitude;
+                        myLng = position.coords.longitude;
+                        renderMap();
+                    });
+                }
+                else {
+                    alert("Geolocation is not supported by your web browser.");
+                }
+            }
+            function renderMap() {
+            	myCoords = new google.maps.LatLng(myLat, myLng);
+            	map.panTo(myCoords);
+            	marker = new google.maps.Marker({
+                    position: myCoords,
+                    title: "<div>eodmar01</div> <div>distance to nearest car: " + "10</div>",
+                });
+            	marker.setMap(map);
+
+                // Open info window on click of marker
+                google.maps.event.addListener(marker, 'click', function() {
+                    infowindow.setContent(marker.title);
+                    infowindow.open(map, marker);
+                });
+            }
+        </script>
+    </head>
+    <body onload="initMap()">
+        <div id="map"></div>
+    </body>
+
+
+
+
+
+
+</html>
