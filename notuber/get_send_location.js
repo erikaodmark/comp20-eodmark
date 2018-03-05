@@ -42,23 +42,16 @@ function getMyLocation() {
 function renderMap() {
     myCoords = new google.maps.LatLng(myLat, myLng);
     map.panTo(myCoords);
-    // the marker for me
-    marker = new google.maps.Marker({
-        position: myCoords,
-        title: "<div>" + username + "</div><div>distance to nearest "
-                + theirType + ": " + "10</div>",
-    });
-    marker.setMap(map);
-    google.maps.event.addListener(marker, 'click', function() {
-        infowindow.setContent(this.title);
-        infowindow.open(map, this);
-    });
 
+    var minDistance = Infinity;
     //the markers for all other passengers or vehicles
     for (i = 0; i < dataObjects.length; i++) {
         var latLng = new google.maps.LatLng(dataObjects[i].lat, dataObjects[i].lng);
         var usr = dataObjects[i].username;
-        var distToMe = 20
+        var distToMe = 0.000621371 * google.maps.geometry.spherical.computeDistanceBetween(myCoords, latLng);
+        if (distToMe < minDistance){
+            minDistance = distToMe;
+        }
         m = new google.maps.Marker({
             position: latLng,
             title: "<div>" + usr + "</div><div>distance to me: " +
@@ -70,6 +63,18 @@ function renderMap() {
             infowindow.open(map, this);
         });
     }
+
+    // the marker for me
+    marker = new google.maps.Marker({
+        position: myCoords,
+        title: "<div>" + username + "</div><div>distance to nearest "
+                + theirType + ": " + minDistance + "</div>",
+    });
+    marker.setMap(map);
+    google.maps.event.addListener(marker, 'click', function() {
+        infowindow.setContent(this.title);
+        infowindow.open(map, this);
+    });
 
 
 }
@@ -95,12 +100,7 @@ function httpPost() {
                 myType = "vehicle"
                 theirType = "passenger"
             }
-            parseJson();
         }
     }
     http.send(data);
-}
-
-function parseJson() {
-
 }
