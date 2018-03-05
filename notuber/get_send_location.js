@@ -43,8 +43,19 @@ function renderMap() {
     myCoords = new google.maps.LatLng(myLat, myLng);
     map.panTo(myCoords);
 
+    //Assign Icons based on who is a vehicle and who is a passenger
+    var theirIcon;
+    var myIcon;
+    if (theirType == "vehicle") {
+        theirIcon = "vehicle.png";
+        myIcon = "passenger.png";
+    } else {
+        myIcon = "vehicle.png";
+        theirIcon = "passenger.png";
+    }
+
+    //Caclulate relative distances and assign markers for the vehicles or passengers
     var minDistance = Infinity;
-    //the markers for all other passengers or vehicles
     for (i = 0; i < dataObjects.length; i++) {
         var latLng = new google.maps.LatLng(dataObjects[i].lat, dataObjects[i].lng);
         var usr = dataObjects[i].username;
@@ -52,10 +63,12 @@ function renderMap() {
         if (distToMe < minDistance){
             minDistance = distToMe;
         }
+
         m = new google.maps.Marker({
             position: latLng,
             title: "<div>" + usr + "</div><div>distance to me: " +
-                    distToMe +  "</div>",
+                    distToMe +  " miles</div>",
+            icon: theirIcon,
         });
         m.setMap(map);
         google.maps.event.addListener(m, 'click', function() {
@@ -65,10 +78,16 @@ function renderMap() {
     }
 
     // the marker for me
+    if (isFinite(minDistance)) {
+        var myInfo = "<div>" + username + "</div><div>distance to nearest "
+                + theirType + ": " + minDistance + " miles</div>"
+    } else {
+        var myInfo = "<div>" + username + "</div><div>We can't find any "+theirType+"s!</div>"
+    }
     marker = new google.maps.Marker({
         position: myCoords,
-        title: "<div>" + username + "</div><div>distance to nearest "
-                + theirType + ": " + minDistance + "</div>",
+        title: myInfo,
+        icon: myIcon,
     });
     marker.setMap(map);
     google.maps.event.addListener(marker, 'click', function() {
@@ -94,7 +113,6 @@ function httpPost() {
                 dataObjects = obj.vehicles
                 myType = "passenger"
                 theirType = "vehicle"
-                console.log("1" + theirType)
             } else if(obj.hasOwnProperty('passengers')){
                 dataObjects = obj.passengers
                 myType = "vehicle"
