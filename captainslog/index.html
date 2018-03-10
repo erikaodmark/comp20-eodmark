@@ -7,8 +7,31 @@
     <title>Captain's Log</title>
     <link rel="stylesheet" href="style.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script>
-        // Your work will be done here...
+    <script type="text/javascript">
+
+        $(document).ready(function(e){
+            var htmlStr = ""
+            for (var i = 0; i < localStorage.length; i++){
+                htmlStr = '<div>' + localStorage.getItem(localStorage.key(i)) + '</div>' + htmlStr;
+                console.log(i)
+            }
+            $('#log').html(htmlStr);
+
+            $('#msg').keypress(function(event){
+                var keycode = (event.keyCode ? event.keyCode : event.which);
+                if(keycode == '13'){
+                    var d = new Date();
+                    htmlStr = $('#log').html();
+                    var stamp = d.toString() + ' - ' + $('#msg').val();
+                    localStorage.setItem(d.toString(), stamp);
+                    htmlStr = '<div>'+ stamp +'</div>' + htmlStr;
+                    $('#log').html(htmlStr);
+                    $('#msg').val(String.Empty);
+                }
+            });
+        });
+
+
     </script>
 </head>
 
