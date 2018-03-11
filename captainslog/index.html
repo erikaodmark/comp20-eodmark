@@ -10,12 +10,12 @@
     <script type="text/javascript">
 
         $(document).ready(function(e){
-            var htmlStr = ""
+            var htmlStr = "";
             for (var i = 0; i < localStorage.length; i++){
-                htmlStr = '<div>' + localStorage.getItem(localStorage.key(i)) + '</div>' + htmlStr;
-                console.log(i)
+                htmlStr = '<div class="stamp">' + localStorage.getItem(localStorage.key(i)) + '</div>' + htmlStr;
             }
             $('#log').html(htmlStr);
+            console.log('print')
 
             $('#msg').keypress(function(event){
                 var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -24,7 +24,7 @@
                     htmlStr = $('#log').html();
                     var stamp = d.toString() + ' - ' + $('#msg').val();
                     localStorage.setItem(d.toString(), stamp);
-                    htmlStr = '<div>'+ stamp +'</div>' + htmlStr;
+                    htmlStr = '<div class="stamp">'+ stamp +'</div>' + htmlStr;
                     $('#log').html(htmlStr);
                     $('#msg').val(String.Empty);
                 }
