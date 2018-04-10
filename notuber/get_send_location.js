@@ -100,7 +100,7 @@ function renderMap() {
 
 function httpPost() {
     var http = new XMLHttpRequest();
-    var url = "https://jordan-marsh.herokuapp.com/rides";
+    var url = "https://secret-peak-47728.herokuapp.com/rides";
     var data = "username=" + username + "&lat=" + myLat + "&lng=" + myLng;
     http.open("POST", url, false);
 
