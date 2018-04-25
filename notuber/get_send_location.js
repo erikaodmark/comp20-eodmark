@@ -9,7 +9,8 @@ var myOptions = {
 };
 var myMarker
 var infowindow = new google.maps.InfoWindow();
-var username = "RG8IotI93V"
+var username = "JANET"
+// var username = "RG8IotI93V"
 
 // myType is either passenger or person, and dataObjects is either an array
 // of passengers or an array of vehicles (theirType opposite of myType)
@@ -100,7 +101,7 @@ function renderMap() {
 
 function httpPost() {
     var http = new XMLHttpRequest();
-    var url = "https://secret-peak-47728.herokuapp.com/rides";
+    var url = "https://secret-ravine-44507.herokuapp.com/rides";
     var data = "username=" + username + "&lat=" + myLat + "&lng=" + myLng;
     http.open("POST", url, false);
 
