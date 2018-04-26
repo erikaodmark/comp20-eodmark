@@ -19,7 +19,7 @@
     </div>
     <div>
         <h2>Abstract</h2>
-        <p></p>
+        <p>The first issue I found was a vulnerability that allowed me to write code and have it executed every time the webpage http://secret-ravine-44507.herokuapp.com is visited. The code that I wrote made a popup appear on the page, and it shows that a hacker can make whatever changes to the webpage they like. The second vulnerability allows me to enter impossible longitude and latitude data as my location. This means that a passenger or vehicle can, for example, claim to have a latitude that is greater than the maximum, 90.  This causes the map to give false information about the number of passengers present. The last issue that I found allows for anyone to access the server and post data to the database. This is generally a bad practice because it means that everyone has access to the data, and that any person or website, regardless of use case or intent, can use the database.</p>
     </div>
     <div>
         <h2>Issue 1</h2>
@@ -47,11 +47,11 @@
     </div>
     <div>
         <h2>Conclusion</h2>
-        <p></p>
+        <p>The good news is that the first two issues are very easy to fix. By sanitizing input and not allowing for invalid inputs, these two vulnerabilities can be solved. This requires minimal work, and has a low cost. The third issue is less simple to fix. It requires changing the functionality of the product, because it means restricting access to the API. To do this, we could use OAuth to authorize only the Assignment 2 webpage to use the server. It would also help to require user authentication in order to use this webpage, which would give each user their own username. This is a more costly fix, but it would also improve the product’s usability.</p>
     </div>
     <div>
         <h2>References</h2>
-        <p></p>
+        <p>I learned about Issue 1 from the example in class. I learned about CORS from the lab, and I found out what OAuth is from the website: https://mobilejazz.com/blog/which-security-risks-do-cors-imply/.</p>
     </div>
 </body>
 </html>
