@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Security Review</title>
+  <link rel="stylesheet" href="style.css"/>
+  <meta charset="utf-8" />
+</head>
+
+<body>
+    <h1>Assignment 4: Security Review</h1>
+    <div>
+      <h2>Introduction</h2>
+      <p>The product, notuber, is designed to accept data from passengers and vehicles, store that data in a database, and provide it again in different contexts. More specifically, there is an interface for passengers that records their location and time of their request, and it provides them with a visualization of the vehicles that checked in within the past five minutes. Similarly, when the vehicles check in, they are provided with a visualization of the recent passengers who requested rides. However, the server can be accessed by bypassing this interface. I will perform a threat review of the product made by Chris Markus, in order to shed light on security vulnerabilities of the product, and to point out ways in which we can improve them.</p>
+    </div>
+    <div>
+      <h2>Methodology</h2>
+      <p>I began by using curl to look for places that are vulnerable to Cross Site Scripting attacks. Specifically, I used curl to send POST requests to the /rides path. This was black box testing, as I did not look at the code to find this issue. I also used curl to enter incorrect latitude data to the same /rides path. This was also black box testing. Lastly, I looked at the code and found that CORS was enabled, which was white box testing.</p>
+    </div>
+    <div>
+        <h2>Abstract</h2>
+        <p></p>
+    </div>
+    <div>
+        <h2>Issue 1</h2>
+        <p>Cross Site Scripting Attack. Code that I wrote is executed and results in a popup alert every time the page http://secret-ravine-44507.herokuapp.com is visited. This issue is high severity because as the attacker, I can choose to make any changes I wish to the website, including redirecting to a different page, or overwriting the html displayed on the page. I found this issue by entering the following curl command in my terminal:</p>
+        <code>curl --data "username=&ltscript&gtalert('test')&lt/script&gt&amplat=1&amplng=1"https://secret-ravine-44507.herokuapp.com/rides</code>
+        <p>The command goes runs without errors, and now upon visiting the page mentioned above, the following appears:</p>
+        <img src="alert.jpg" alt="Alert">
+        <p>My suggestion to resolve this issue is to sanitize input for the server’s /rides path. This can be done by rejecting input that has any characters that are not alphanumeric.</p>
+    </div>
+    <div>
+        <h2>Issue 2</h2>
+        <p>The server does not check that longitude and latitude input is valid. This means that I was allowed to post data to the server that said a passenger was at a location with latitude 100 and longitude 10, even though the maximum possible latitude on earth is 90. This is a medium severity issue since it allows for impossible data to be shown on http://secret-ravine-44507.herokuapp.com and on the frontend Assignment 2 page. I found this security vulnerability by using the following curl command:</p>
+        <code>curl --data "username=erika&amplat=100&amplng=10"https://secret-ravine-44507.herokuapp.com/rides</code>
+        <p>The following is a screenshot of the issue on http://secret-ravine-44507.herokuapp.com:</p>
+        <img src="lat.jpg" alt="Input Verification">
+    </div>
+    <div>
+        <h2>Issue 3</h2>
+        <p>Cross Origin Resource Sharing is enabled for anyone who wishes to send a POST request to the server. This is a bad programming practice because it means that any person can alter the state of the server/ the database from any location. This is a low severity issue, since it is an intended feature. The location of this issue is in the server, and I found it by looking at the code. One possible way to resolve this issue is to require user authentication for the Assignment 2 website, and only authorize (using OAuth) the Assignment 2 website to GET and POST to the server.</p>
+        <p>Here is a screenshot of the code that enables CORS:</p>
+        <img src="CORS.jpg" alt="Enabled CORS">
+        <p>And the following is the resulting issue on my Assignment 2 page, which I have hooked up to the server http://secret-ravine-44507.herokuapp.com/rides (I have done this since I don’t have access to my partner’s Assignment 2):</p>
+        <img src="map.jpg" alt="Enabled CORS">
+        <p>Here, we can see that the closest passenger is 3239 miles away, but there are no passengers shown on the map. To fix this issue, I would recommend checking that the latitude is within -90 and 90, and that the longitude is within -180 and 180, and rejecting all post requests containing data that does not fall within these bounds.</p>
+    </div>
+    <div>
+        <h2>Conclusion</h2>
+        <p></p>
+    </div>
+    <div>
+        <h2>References</h2>
+        <p></p>
+    </div>
+</body>
+</html>
